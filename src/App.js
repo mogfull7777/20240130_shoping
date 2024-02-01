@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { Outlet, Route, Routes } from "react-router-dom";
+
+import NikeNavBar from "./pages/NikeNavBar.js";
+import Main from "./pages/Main.js";
+import Men from "./pages/Men.js";
+import Women from "./pages/Women.js";
 
 function App() {
+  const Layout = () => {
+    return (
+      <div>
+        <NikeNavBar />
+
+        <Outlet />
+      </div>
+    );
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />}></Route>
+          <Route path="/men" element={<Men />}></Route>
+          <Route path="/women" element={<Women />}></Route>
+        </Route>
+      </Routes>
     </div>
   );
 }
